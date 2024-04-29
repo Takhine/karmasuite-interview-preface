@@ -1,14 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { db } from "../../db";
+import { eq } from "drizzle-orm";
 
 export type ExpensesPayload = Awaited<ReturnType<typeof getExpenses>>;
 
+/**
+ * @description The API returns a list of 
+ * expense names and their associated account codes.
+ */
 const getExpenses = async (req: NextApiRequest) => {
-    /**
-     * TODO
-     * @description Complete the rest of this function as specified in the README.md
-     */
-    const result = [] as {}[];
+    const result = await db
+        .select({
+            expenseName: db.expense.name,
+            accountCode: db.account.code,
+        })
+        .from(db.expense)
+        .innerJoin(db.account, eq(db.account.id, db.expense.accountId))
 
     return result;
 };

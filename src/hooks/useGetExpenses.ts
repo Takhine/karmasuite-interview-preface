@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import type { ExpensesPayload } from "../pages/api/expenses";
 import { useMemo } from "react";
+import { fetcher } from "../utils/fetcher";
 
 export const useGetExpenses = () => {
     const requestUrl = useMemo(() => {
@@ -12,12 +13,7 @@ export const useGetExpenses = () => {
     return useQuery({
         queryKey: ["expenses"],
         queryFn: async (): Promise<ExpensesPayload> => {
-            return await fetch(requestUrl, {
-                headers: {
-                    "content-type": "application/json",
-                },
-                method: "get",
-            }).then((res) => res.json());
+            return await fetcher(requestUrl)
         },
     });
 };
