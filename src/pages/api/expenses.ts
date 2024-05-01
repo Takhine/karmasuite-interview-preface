@@ -9,15 +9,20 @@ export type ExpensesPayload = Awaited<ReturnType<typeof getExpenses>>;
  * expense names and their associated account codes.
  */
 const getExpenses = async (req: NextApiRequest) => {
-    const result = await db
+    console.log(req.query)
+    const selectApproach = await db
         .select({
+            id: db.expense.id,
             expenseName: db.expense.name,
             accountCode: db.account.code,
         })
         .from(db.expense)
         .innerJoin(db.account, eq(db.account.id, db.expense.accountId))
+        .limit(10)
+        .offset(0)
 
-    return result;
+
+    return selectApproach;
 };
 
 export default async function handler(

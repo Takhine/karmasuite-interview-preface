@@ -76,3 +76,44 @@ If you do not have this to present at the beginning of the interview, the interv
 ### Requirements
 1. Complete the implementation of the /api/expenses route so that the api returns a list of expense names and their associated account codes.
 2. On the home page (http://localhost:3000/), render the data that you queried in step (1) (styling does not matter).
+
+
+### Practice Questions
+
+#### Drizzle/Sqlite
+1. Get all cost centers where budget is greater than 'N' and groupBy budget range
+2. Get all funds
+
+#### Next.js
+1. Make an api endpoint for getting all funds and fund allocations
+2. Make an api endpoint for getting all cost centers and grouped
+3. Use getServerSideProps to return the data to the view
+4. Implement a common Layout in next.js
+5. Common util for requesting API
+6. Implement basic private route logic
+
+#### React Query
+1. Implement hook for expenses (infinite scroll)
+2. Implement hook for funds as well as cost centers
+3. Dependent query with expense
+
+#### React
+1. Implement Context API (Syntax and usage)
+2. Implement a custom hook for scroll pagination (useQuery)
+3. Implement a custom hook for delaying API response (useDelay)
+
+#### JS
+1. Flattening an Array
+2. Flattening an Object
+3. Map, Set
+4. forEach
+5. reduce hof
+
+#### All of the above
+1. On scroll pagination
+2. Sorting and Filtering by ID, budget range etc
+3. Dynamic URL for expense by id and related details
+4. Available grants for specific expenses
+5. Assign new cost center to expense (Practice Updating)
+5. Insert a new expense (Practice Inserting)
+6. Delete a cost center

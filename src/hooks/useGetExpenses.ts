@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import type { ExpensesPayload } from "../pages/api/expenses";
 import { useMemo } from "react";
 
@@ -9,15 +9,21 @@ export const useGetExpenses = () => {
         return url.toString();
     }, []);
 
-    return useQuery({
+    return useInfiniteQuery({
         queryKey: ["expenses"],
-        queryFn: async (): Promise<ExpensesPayload> => {
-            return await fetch(requestUrl, {
+        queryFn: async ({pageParam = 0}): Promise<ExpensesPayload> => {
+            console.log({pageParam})
+            return await fetch(`${requestUrl}?pageNo=${pageParam}`, {
                 headers: {
                     "content-type": "application/json",
                 },
                 method: "get",
             }).then((res) => res.json());
         },
+        initialPageParam: 0,
+        getNextPageParam: (lastPage: any) => {
+            console.log({lastPage})
+            return lastPage.nextCursor ?? undefined
+        }
     });
 };
